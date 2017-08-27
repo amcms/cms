@@ -6,6 +6,8 @@ class ExampleController extends Controller
 {
     public function index()
     {
+        $db = $this->container->db;
+        // print_r($db);
         return 'ExampleController';
     }
 }

@@ -10,16 +10,15 @@ $settings = require __DIR__ . '/../config/app.php';
 
 foreach (glob(__DIR__ . '/../config/*.php') as $file) {
     $pathAr = pathinfo($file);
-    if ($pathAr['basename'] != 'app') {
-        $settings[$pathAr['basename']] = require $file;
+    if ($pathAr['filename'] != 'app') {
+        $settings[$pathAr['filename']] = require $file;
     }
 }
-
 
 /**
  * Create app object
  */
-$app = new \Amcms\Application($settings);
+$app = new \Amcms\Application(['settings' => $settings]);
 
 /**
  * Define routes for admin panel
@@ -63,7 +62,7 @@ $container['pdo'] = function ($c) {
 // Eloquent ORM
 $container['db'] = function ($c) {
     $capsule = new \Illuminate\Database\Capsule\Manager;
-    $capsule->addConnection($c['settings']['database']);
+    $capsule->addConnection($c['settings']['database']['mysql']);
 
     $capsule->setAsGlobal();
     $capsule->bootEloquent();
@@ -79,7 +78,7 @@ $container['flash'] = function () {
 // Monolog
 $container['logger'] = function($c) {
     $logger = new \Monolog\Logger('AmcLogger');
-    $fileHandler = new \Monolog\Handler\StreamHandler("../storage/logs/app.log");
+    $fileHandler = new \Monolog\Handler\StreamHandler('../storage/logs/app.log');
     $logger->pushHandler($fileHandler);
     return $logger;
 };
