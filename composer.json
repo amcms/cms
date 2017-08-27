@@ -26,7 +26,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Amcms\\": "app/"
+            "App\\": "app/"
         }
     },
     "autoload-dev": {
