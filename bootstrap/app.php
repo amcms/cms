@@ -34,7 +34,7 @@ $container = $app->getContainer();
 $container['Front'] = function($c) {
     return new \Amcms\Controllers\FrontController($c);
 };
-$container['Manager'] = function($container) {
+$container['Manager'] = function($c) {
     return new \Amcms\Controllers\ManagerController($c);
 };
 
