@@ -5,7 +5,7 @@
  */
 $app->get('/ex', \App\Controllers\ExampleController::class . ':index');
 
-$app->any('/', 'Front:run');
+$app->any('/[{arg:.*}]', 'Front:run');
 // $app->any('/', function() {
 //     return 'Home';
 // });

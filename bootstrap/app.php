@@ -31,6 +31,8 @@ require __DIR__ . '/../routes/web.php';
  * Register base controllers
  */
 $container = $app->getContainer();
+$container['path'] = dirname(dirname(__FILE__));
+
 $container['Front'] = function($c) {
     return new \Amcms\Controllers\FrontController($c);
 };
@@ -81,6 +83,24 @@ $container['logger'] = function($c) {
     $fileHandler = new \Monolog\Handler\StreamHandler('../storage/logs/app.log');
     $logger->pushHandler($fileHandler);
     return $logger;
+};
+
+// Register Twig View helper
+$container['twig'] = function ($c) {
+    $view = new \Slim\Views\Twig('../resources/views/templates', [
+        'cache' => '../storage/cache'
+    ]);
+    
+    // Instantiate and add Slim specific extension
+    $basePath = rtrim(str_ireplace('index.php', '', $c['request']->getUri()->getBasePath()), '/');
+    $view->addExtension(new Slim\Views\TwigExtension($c['router'], $basePath));
+
+    return $view;
+};
+
+// MODX API
+$container['modx'] = function($c) {
+    return new \Amcms\Oldapi\Parser($c);
 };
 
 /**
