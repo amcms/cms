@@ -6,14 +6,11 @@ class ExampleController extends Controller
 {
     public function index($request, $responce, $arg)
     {
-        // $db = $this->container->db;
-        // print_r($db);
-        // return 'ExampleController';
-        // 
-        // $v = view('twig');
-        // print_r(app());
-        // die();
-        return $this->twig->render($responce, 'index.twig', ['hello' => 'Hi!']);
+        // use twig view
+        // return $this->twig->render($responce, 'index.twig', ['hello' => 'Hi, Twig View!']);
+
+        // use php view
+        return $this->php->render($responce, 'index.php', ['hello' => 'Hi, Php View!']);
         
         // $this->modx->parseChunk('123', [1 => '11', 2 => '22'], '[+', '+]');
         // return '';

@@ -85,7 +85,7 @@ $container['logger'] = function($c) {
     return $logger;
 };
 
-// Register Twig View helper
+// Twig View 
 $container['twig'] = function ($c) {
     $view = new \Slim\Views\Twig('../resources/views/templates', [
         'cache' => '../storage/cache'
@@ -96,6 +96,11 @@ $container['twig'] = function ($c) {
     $view->addExtension(new Slim\Views\TwigExtension($c['router'], $basePath));
 
     return $view;
+};
+
+// Php View
+$container['php'] = function($c) {
+    return new \Slim\Views\PhpRenderer('../resources/views/templates');
 };
 
 // MODX API

@@ -6,11 +6,9 @@
 $app->get('/ex', \App\Controllers\ExampleController::class . ':index');
 
 $app->any('/[{arg:.*}]', 'Front:run');
-// $app->any('/', function() {
-//     return 'Home';
-// });
+
 
 /**
  * Multilang use (@todo)
  */
-// $app->group('/' . $app->get('locale'), 'FrontController:run');
+// $app->group('/' . $app->get('locale'), 'Front:run');
