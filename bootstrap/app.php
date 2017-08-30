@@ -36,8 +36,13 @@ $container['path'] = dirname(dirname(__FILE__));
 $container['Front'] = function($c) {
     return new \Amcms\Controllers\FrontController($c);
 };
+
 $container['Manager'] = function($c) {
     return new \Amcms\Controllers\ManagerController($c);
+};
+
+$container['Auth'] = function($c) {
+    return new \Amcms\Controllers\AuthController($c);
 };
 
 /**
@@ -87,8 +92,11 @@ $container['logger'] = function($c) {
 
 // Twig View 
 $container['twig'] = function ($c) {
+    $isDebug = $c['settings']['debug'] ?: false;
+    
     $view = new \Slim\Views\Twig('../resources/views/templates', [
-        'cache' => '../storage/cache'
+        'cache' => '../storage/cache',
+        'debug' => $isDebug,
     ]);
     
     // Instantiate and add Slim specific extension
