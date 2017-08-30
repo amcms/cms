@@ -36,7 +36,7 @@ $container['path'] = dirname(dirname(__FILE__));
 $container['Front'] = function($c) {
     return new \Amcms\Controllers\FrontController($c);
 };
-$container['Manager'] = function($container) {
+$container['Manager'] = function($c) {
     return new \Amcms\Controllers\ManagerController($c);
 };
 
