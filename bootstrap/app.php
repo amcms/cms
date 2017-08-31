@@ -100,6 +100,11 @@ $container['modx'] = function($c) {
     return new \Amcms\Oldapi\Parser($c);
 };
 
+// Service GlobalPhs
+$container['gphs'] = function($c) {
+    return new \Amcms\Services\GlobalPhsService($c);
+};
+
 /**
  * Finish bootstrap
  */

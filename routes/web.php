@@ -12,6 +12,12 @@ $app->post('/signup', 'Auth:postSignup');
 
 $app->get('/ex', \App\Controllers\ExampleController::class . ':index');
 
+// DEV - REMOVE AFTER TEST
+$app->get('/srv', function ($request, $responce, $args) {
+    $this->gphs->set('site_name', 'SLIM3');
+    $this->twig->render($responce, 'index.twig');
+});
+
 $app->any('/[{arg:.*}]', 'Front:run');
 
 
