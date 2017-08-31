@@ -18,8 +18,8 @@ foreach (glob(__DIR__ . '/../config/*.php') as $file) {
 /**
  * Create app object
  */
-$settings['path'] = dirname(dirname(__FILE__));
-$app = new \Amcms\Application(['settings' => $settings]);
+// $settings['path'] = dirname(dirname(__FILE__));
+$app = new \Amcms\Application(['settings' => $settings, 'path' => dirname(dirname(__FILE__))]);
 
 /**
  * Define routes for admin panel
