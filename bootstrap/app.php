@@ -69,7 +69,11 @@ $container['pdo'] = function ($c) {
 // Eloquent ORM
 $container['db'] = function ($c) {
     $capsule = new \Illuminate\Database\Capsule\Manager;
-    $capsule->addConnection($c['settings']['database']['mysql']);
+    // $capsule->addConnection($c['settings']['database']['mysql']);
+    
+    $sqliteData = $c['settings']['database']['sqlite'];
+    $sqliteData['database'] = database_path($sqliteData['database']);
+    $capsule->addConnection($sqliteData);
 
     $capsule->setAsGlobal();
     $capsule->bootEloquent();
