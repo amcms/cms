@@ -11,4 +11,7 @@ return [
 
     // Display call stack in orignal slim error when debug is off
     'displayErrorDetails' => true,
+
+    // witch SQL engine must use
+    'dbEngine' => 'sqlite', // 'mysql',
 ];

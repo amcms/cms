@@ -25,11 +25,12 @@
 
                 <div class="card-content">
                     <div class="card-text">
-                        <form class="form-signin" action="{{ path_for('signup') }}" method="post">
+
+                        <form class="form-signin" action="{{ path_for('signup.post') }}" method="post">
                             <div class="field">
-                                <label class="label">Your name</label>
+                                <label class="label">Your name*</label>
                                 <div class="control has-icons-left has-icons-right">
-                                    <input type="text" name="name" class="input is-danger" placeholder="Your name" value="">
+                                    <input type="text" name="name" class="input{{ errors.name ? '  is-danger' : '' }}" placeholder="Your name" value="{{ old.name ? : '' }}">
                                     <span class="icon is-small is-left">
                                         <i class="fa fa-user-o"></i>
                                     </span>
@@ -37,13 +38,15 @@
                                         <i class="fa fa-warning"></i>
                                     </span>
                                 </div>
-                                <p class="help is-danger">This name is invalid</p>
+                                {% if errors.name %}
+                                <p class="help is-danger">{{ errors.name | first }}</p>
+                                {% endif %}
                             </div>
                             
                             <div class="field">
                                 <label class="label">Email address*</label>
                                 <div class="control has-icons-left has-icons-right">
-                                    <input type="email" name="email" class="input is-danger"  placeholder="you@domain.com" value="" required1>
+                                    <input type="email" name="email" class="input{{ errors.email ? '  is-danger' : '' }}"  placeholder="you@domain.com" value="{{ old.email ? : '' }}" required>
                                     <span class="icon is-small is-left">
                                         <i class="fa fa-envelope"></i>
                                     </span>
@@ -51,13 +54,15 @@
                                         <i class="fa fa-warning"></i>
                                     </span>
                                 </div>
-                                <p class="help is-danger">This email is invalid</p>
+                                {% if errors.email %}
+                                <p class="help is-danger">{{ errors.email | first }}</p>
+                                {% endif %}
                             </div>
                             
                             <div class="field">
                                 <label class="label">Password*</label>
                                 <div class="control has-icons-left has-icons-right">
-                                    <input type="password" name="password" class="input is-danger" value="" required1>
+                                    <input type="password" name="password" class="input{{ errors.password ? '  is-danger' : '' }}" value="" required>
                                     <span class="icon is-small is-left">
                                         <i class="fa fa-user-secret"></i>
                                     </span>
@@ -65,7 +70,9 @@
                                         <i class="fa fa-warning"></i>
                                     </span>
                                 </div>
-                                <p class="help is-danger">This password is invalid</p>
+                                {% if errors.password %}
+                                <p class="help is-danger">{{ errors.password | first }}</p>
+                                {% endif %}
                             </div>
                             
                             {# <div class="field">

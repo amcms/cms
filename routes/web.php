@@ -7,8 +7,8 @@
 /**
  * Auth routes
  */
-$app->get('/signup', 'Auth:getSignup')->setName('signup');
-$app->post('/signup', 'Auth:postSignup');
+$app->get('/signup', 'Auth:getSignup')->setName('signup.get');
+$app->post('/signup', 'Auth:postSignup')->setName('signup.post');
 
 $app->get('/ex', \App\Controllers\ExampleController::class . ':index');
 

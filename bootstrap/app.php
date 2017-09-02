@@ -53,27 +53,37 @@ $container['Auth'] = function($c) {
 // Обработчик ошибок
 $app->add(new \Zeuxisoo\Whoops\Provider\Slim\WhoopsMiddleware($app));
 
+// Old forms data
+$app->add(new \Amcms\Middleware\OldRequestValues($container));
+
+// Form errors data
+$app->add(new \Amcms\Middleware\FormErrors($container));
+
 // Csrf
 // $app->add(new \Slim\Csrf\Guard);
 
 // PDO
-$container['pdo'] = function ($c) {
-    $db = $c['settings']['database'];
-    $pdo = new PDO("mysql:host=" . $db['host'] . ";dbname=" . $db['dbname'],
-        $db['user'], $db['pass']);
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
-    return $pdo;
-};
+// $container['pdo'] = function ($c) {
+//     $db = $c['settings']['database'];
+//     $pdo = new PDO("mysql:host=" . $db['host'] . ";dbname=" . $db['dbname'],
+//         $db['user'], $db['pass']);
+//     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+//     $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
+//     return $pdo;
+// };
 
 // Eloquent ORM
 $container['db'] = function ($c) {
     $capsule = new \Illuminate\Database\Capsule\Manager;
-    // $capsule->addConnection($c['settings']['database']['mysql']);
-    
-    $sqliteData = $c['settings']['database']['sqlite'];
-    $sqliteData['database'] = database_path($sqliteData['database']);
-    $capsule->addConnection($sqliteData);
+
+    $dbEngine = $c['settings']['dbEngine'];
+    $dbConfig = $c['settings']['database'][$dbEngine];
+
+    if ($dbEngine == 'sqlite') {
+        $dbConfig['database'] = database_path($dbConfig['database']);
+    }
+
+    $capsule->addConnection($dbConfig);
 
     $capsule->setAsGlobal();
     $capsule->bootEloquent();
@@ -105,7 +115,7 @@ $container['modx'] = function($c) {
 };
 
 // Service GlobalPhs
-$container['gphs'] = function($c) {
+$container['globalPhs'] = function($c) {
     return new \Amcms\Services\GlobalPhsService($c);
 };
 
