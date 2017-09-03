@@ -50,7 +50,7 @@ $container['Auth'] = function($c) {
  * @todo Перенести подключение в ядро, с использованием wrappers
  */
 
-// Обработчик ошибок
+// Error formatting
 $app->add(new \Zeuxisoo\Whoops\Provider\Slim\WhoopsMiddleware($app));
 
 // Old forms data
@@ -73,23 +73,23 @@ $app->add(new \Amcms\Middleware\FormErrors($container));
 // };
 
 // Eloquent ORM
-$container['db'] = function ($c) {
-    $capsule = new \Illuminate\Database\Capsule\Manager;
+$capsule = new \Illuminate\Database\Capsule\Manager;
 
-    $dbEngine = $c['settings']['dbEngine'];
-    $dbConfig = $c['settings']['database'][$dbEngine];
+$dbEngine = $container['settings']['dbEngine'];
+$dbConfig = $container['settings']['database'][$dbEngine];
 
-    if ($dbEngine == 'sqlite') {
-        $dbConfig['database'] = database_path($dbConfig['database']);
-    }
+if ($dbEngine == 'sqlite') {
+    $dbConfig['database'] = database_path($dbConfig['database']);
+}
 
-    $capsule->addConnection($dbConfig);
+$capsule->addConnection($dbConfig);
+$capsule->setAsGlobal();
+$capsule->bootEloquent();
 
-    $capsule->setAsGlobal();
-    $capsule->bootEloquent();
-
+$container['db'] = function () use ($capsule) {
     return $capsule;
 };
+
 
 // Flash session messages
 $container['flash'] = function () {

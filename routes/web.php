@@ -18,7 +18,7 @@ $app->get('/srv', function ($request, $responce, $args) {
     $this->twig->render($responce, 'index.twig');
 });
 
-$app->any('/[{arg:.*}]', 'Front:run');
+$app->any('/[{arg:.*}]', 'Front:run')->setName('front');
 
 
 /**

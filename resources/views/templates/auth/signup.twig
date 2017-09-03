@@ -34,9 +34,11 @@
                                     <span class="icon is-small is-left">
                                         <i class="fa fa-user-o"></i>
                                     </span>
+                                    {% if errors.name %}
                                     <span class="icon is-small is-right">
                                         <i class="fa fa-warning"></i>
                                     </span>
+                                    {% endif %}
                                 </div>
                                 {% if errors.name %}
                                 <p class="help is-danger">{{ errors.name | first }}</p>
@@ -50,9 +52,11 @@
                                     <span class="icon is-small is-left">
                                         <i class="fa fa-envelope"></i>
                                     </span>
+                                    {% if errors.email %}
                                     <span class="icon is-small is-right">
                                         <i class="fa fa-warning"></i>
                                     </span>
+                                    {% endif %}
                                 </div>
                                 {% if errors.email %}
                                 <p class="help is-danger">{{ errors.email | first }}</p>
@@ -66,9 +70,11 @@
                                     <span class="icon is-small is-left">
                                         <i class="fa fa-user-secret"></i>
                                     </span>
+                                    {% if errors.password %}
                                     <span class="icon is-small is-right">
                                         <i class="fa fa-warning"></i>
                                     </span>
+                                    {% endif %}
                                 </div>
                                 {% if errors.password %}
                                 <p class="help is-danger">{{ errors.password | first }}</p>
