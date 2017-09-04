@@ -11,4 +11,9 @@ return [
 
     // Display call stack in orignal slim error when debug is off
     'displayErrorDetails' => true,
+
+    'quad' => [
+        'templates' => __DIR__ . '/../resources/views',
+        'cache' => __DIR__ . '/../resources/views/compiled',
+    ],
 ];

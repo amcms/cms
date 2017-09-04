@@ -100,6 +100,15 @@ $container['modx'] = function($c) {
     return new \Amcms\Oldapi\Parser($c);
 };
 
+$container['quad'] = function($c) {
+    $settings = $c['settings']['quad'];
+
+    return new \Amcms\View\QuadView([
+        'cache' => $settings['cache'],
+        'templates' => $settings['templates'],
+    ]);
+};
+
 /**
  * Finish bootstrap
  */
