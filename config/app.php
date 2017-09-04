@@ -17,6 +17,6 @@ return [
 
     'quad' => [
         'templates' => __DIR__ . '/../resources/views',
-        'cache' => __DIR__ . '/../resources/views/compiled',
+        'cache' => __DIR__ . '/../storage/cache',
     ],
 ];
