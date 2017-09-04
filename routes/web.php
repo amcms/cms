@@ -7,12 +7,18 @@
 /**
  * Auth routes
  */
-$app->get('/signup', 'Auth:getSignup')->setName('signup');
-$app->post('/signup', 'Auth:postSignup');
+$app->get('/signup', 'Auth:getSignup')->setName('signup.get');
+$app->post('/signup', 'Auth:postSignup')->setName('signup.post');
 
 $app->get('/ex', \App\Controllers\ExampleController::class . ':index');
 
-$app->any('/[{arg:.*}]', 'Front:run');
+// DEV - REMOVE AFTER TEST
+$app->get('/srv', function ($request, $responce, $args) {
+    $this->gphs->set('site_name', 'SLIM3');
+    $this->twig->render($responce, 'index.twig');
+});
+
+$app->any('/[{arg:.*}]', 'Front:run')->setName('front');
 
 
 /**
