@@ -116,12 +116,7 @@ $container['modx'] = function($c) {
 
 // Quad View
 $container['quad'] = function($c) {
-    $settings = $c['settings']['quad'];
-
-    return new \Amcms\View\QuadView([
-        'cache' => $settings['cache'],
-        'templates' => $settings['templates'],
-    ]);
+    return new \Amcms\View\QuadView($c['settings']['quad']);
 };
 
 // Service GlobalPhs

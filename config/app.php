@@ -16,7 +16,8 @@ return [
     'dbEngine' => 'sqlite', // 'mysql',
 
     'quad' => [
-        'templates' => __DIR__ . '/../resources/views',
+        'templates' => __DIR__ . '/../resources/views/templates',
+        'chunks' => __DIR__ . '/../resources/views/chunks',
         'cache' => __DIR__ . '/../storage/cache',
     ],
 ];

@@ -13,7 +13,24 @@ class ExampleController extends Controller
         // use php view
         // return $this->php->render($responce, 'index.inc', ['hello' => 'Hi, Php View!']);
         
-        // $this->modx->parseChunk('123', [1 => '11', 2 => '22'], '[+', '+]');
+        // вывод чанка через эмулятор старого парсера
+        // $out = $this->modx->parseChunk('@CODE: [+a+]', ['a' => '1']);
+        // 
+        // или если чанк в файле resources/views/chunks/chunk.tpl
+        // $out = $this->modx->parseChunk('modx_chunk', ['a' => '1']);
+        // 
+        // либо так
+        // $out = $this->modx->parseChunk('@CODE: {{modx_chunk}}', ['a' => '1']);
+        // 
+        // $response->getBody()->write($out);
+        // return $response;
+        
+        // вывод нормального человека
+        // return $this->container->get('quad')->render($response, 'modx_main.tpl', ['a' => 1]);
+        // 
+        // или
+        // return $this->container->get('quad')->render($response, '@CODE [+a+]', ['a' => 1]);
+        
         // return '';
     }
 }
